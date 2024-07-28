@@ -6,11 +6,10 @@ import { useNavigate } from "react-router-dom"
 
 import { sendOtp } from "../../../services/operations/authAPI"
 import { setSignupData } from "../../../slices/authSlice"
-import { ACCOUNT_TYPE } from "../../../utils/constant"
+import { ACCOUNT_TYPE } from "../../../utils/constants"
 import Tab from "../../common/Tab"
 
 function SignupForm() {
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -73,12 +72,12 @@ function SignupForm() {
     {
       id: 1,
       tabName: "Student",
-      // type: ACCOUNT_TYPE.STUDENT,
+      type: ACCOUNT_TYPE.STUDENT,
     },
     {
       id: 2,
       tabName: "Instructor",
-      // type: ACCOUNT_TYPE.INSTRUCTOR,
+      type: ACCOUNT_TYPE.INSTRUCTOR,
     },
   ]
 

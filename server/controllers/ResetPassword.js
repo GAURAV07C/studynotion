@@ -32,7 +32,7 @@ exports.resetPasswordToken = async (req, res) => {
 
     console.log("DETAILS", updatedDetails);
 
-    const url = `https://localhost:3000/update-password/${token}`;
+    const url = `http://localhost:3000/update-password/${token}`;
 
     await mailSender(
       email,
@@ -75,18 +75,18 @@ exports.resetPassword = async (req, res) => {
       });
     }
 
-    if (!userDetails.resetPasswordExpires < Date.now()) {
+    if (!userDetails.resetPasswordExpires > Date.now()) {
       return res.json({
         success: false,
         message: "Token is expired , please regenerate your token",
       });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const encryptedPassword = await bcrypt.hash(password, 10);
 
     await User.findOneAndUpdate(
       { token: token },
-      { password: hashedPassword },
+      { password: encryptedPassword },
       { new: true }
     );
 

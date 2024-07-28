@@ -5,10 +5,10 @@ import Home from "./pages/Home.jsx";
 import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
 import OpenRoute from "./components/core/Auth/OpenRoute.jsx";
-import NavBar from "../src/components/common/NavNar.jsx"
+import NavBar from "../src/components/common/NavNar.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import UpdatePassword from "./pages/UpdatePassword.jsx";
-
+import VerifyEmail from "./pages/VerifyEmail.jsx";
 
 function App() {
   return (
@@ -42,15 +42,23 @@ function App() {
           }
         />
 
-<Route
+        <Route
+          path="verify-email"
+          element={
+            <OpenRoute>
+              <VerifyEmail />
+            </OpenRoute>
+          }
+        />
+
+        <Route
           path="update-password/:id"
           element={
             <OpenRoute>
               <UpdatePassword />
             </OpenRoute>
           }
-        />  
-
+        />
       </Routes>
     </div>
   );

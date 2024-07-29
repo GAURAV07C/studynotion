@@ -9,6 +9,7 @@ import NavBar from "../src/components/common/NavNar.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import UpdatePassword from "./pages/UpdatePassword.jsx";
 import VerifyEmail from "./pages/VerifyEmail.jsx";
+import About from "./pages/About.jsx";
 
 function App() {
   return (
@@ -59,6 +60,8 @@ function App() {
             </OpenRoute>
           }
         />
+
+        <Route path="/about" element={<About />} />
       </Routes>
     </div>
   );

@@ -42,7 +42,7 @@ const ForgotPassword = () => {
                             !emailSent ? "Reset your Password" : "Check your Email"
                         }
                     </h1>
-                    <p>
+                    <p className="my-4 text-[1.125rem] leading-[1.625rem] text-richblack-100">
                         {!emailSent
                             ? "Have no fear. We'll email you instructions to reset your password. If you dont have access to your email we can try account recovery"
                             : `We have sent the reset email to ${email}`}

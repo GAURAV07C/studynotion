@@ -10,6 +10,11 @@ import ForgotPassword from "./pages/ForgotPassword.jsx";
 import UpdatePassword from "./pages/UpdatePassword.jsx";
 import VerifyEmail from "./pages/VerifyEmail.jsx";
 import About from "./pages/About.jsx";
+import Contact from "./pages/Contact.jsx";
+import PrivateRoute from "./components/core/Auth/PrivateRoute.jsx";
+import Dashboard from "../src/pages/Dashboard.jsx";
+import MyProfile from "./components/core/Dashbord/MyProfile.jsx";
+import Error from "./pages/Error.jsx";
 
 function App() {
   return (
@@ -62,6 +67,24 @@ function App() {
         />
 
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+
+        <Route
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        >
+          <Route path="dashboard/my-profile" element={<MyProfile />} />
+          
+
+
+
+        
+        </Route>
+
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );

@@ -2,13 +2,14 @@ import { useEffect, useState } from "react"
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
 import { BsChevronDown } from "react-icons/bs"
 import { useSelector } from "react-redux"
-import { Link, matchPath, useLocation } from "react-router-dom"
+import { Link, matchPath, useLocation } from "react-router-dom";
+
 import logo from '../../assets/Logo/Logo-Full-Light.png'
 import { NavbarLinks } from "../../data/navbar-links";
-import ProfileDropdown from '../core/Auth/ProfileDropDown'
 import { apiConnector } from '../../services/apiConnector';
 import { categories } from '../../services/api';
-
+import ProfileDropdown from "../core/Auth/ProfileDropDown";
+import { ACCOUNT_TYPE } from "../../utils/constants"
 
 
 const NavNar = () => {
@@ -23,12 +24,14 @@ const NavNar = () => {
   const [loading, setLoading] = useState(false);
 
   const fetchSubLinks = async () => {
+    setLoading(true)
     try {
       const result = await apiConnector("GET", categories.CATEGORIES_API);
       setSubLinks(result.data.allCategories)
     } catch (err) {
       console.log("could not fetch category list")
     }
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -105,7 +108,7 @@ const NavNar = () => {
         </nav>
 
         <div className="hidden items-center gap-x-4 md:flex">
-          {/* {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
+          {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
             <Link to="/dashboard/cart" className="relative">
               <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
               {totalItems > 0 && (
@@ -114,7 +117,7 @@ const NavNar = () => {
                 </span>
               )}
             </Link>
-          )} */}
+          )}
           {token === null && (
             <Link to="/login">
               <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
@@ -131,7 +134,7 @@ const NavNar = () => {
           )}
           {token !== null && <ProfileDropdown />}
         </div>
-        <button className="mr-4 md:hidden">
+        <button className="mr-4 md:hidden ">
           <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
         </button>
       </div>

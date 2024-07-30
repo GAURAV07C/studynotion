@@ -12,6 +12,10 @@ export const categories = {
     CATEGORIES_API : BASE_URL + "/course/showAllCategories"
 };
 
+export const contactusEndpoint = {
+  CONTACT_US_API: BASE_URL + "/reach/contact",
+}
+
 
 export const settingsEndpoints = {
     UPDATE_DISPLAY_PICTURE_API: BASE_URL + "/profile/updateDisplayPicture",

@@ -95,9 +95,9 @@ exports.deleteAccount = async (req, res) => {
       message: "User Delete Successfully",
     })
 
-  
 
-   
+
+
   } catch (err) {
     return res.status(500).json({
       success: false,
@@ -125,3 +125,58 @@ exports.getUserDetails = async (req, res) => {
     });
   }
 };
+
+
+exports.getAlluserDetails = async (req,res) => { 
+  try {
+
+    const id = req.user.id;
+    const userDetails = await User.findById(id)
+    .populate("additionalDetails")
+    .exec();
+
+    console.log(userDetails);
+    return res.status(200).json({
+      success: true,
+      message: "User data fetched successfully",
+      data:userDetails,
+    });
+
+  } catch(err){
+    return res.status(500).json({
+      success: false,
+      error: err.message,
+      });
+  }
+}
+
+exports.getEnrollrdCourses = async (req,res) => {
+    try{
+      const userId = req.user.id;
+
+      const userDetails = await User.findOne({
+        _id:userId,
+      })
+      .populate("courses")
+      .exec();
+
+      if(!userDetails) {
+        return res.status(404).json({
+          success: false,
+          message: `Could not find user with id: ${userDetails}`,
+          });
+      }
+
+      return res.status(200).json({
+        success: true,
+        data:userDetails.courses,
+      })
+
+    } catch(err){
+      return res.status(500).json({
+        success: false,
+        error: err.message,
+        });
+
+    }
+}

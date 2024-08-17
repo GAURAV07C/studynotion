@@ -15,6 +15,7 @@ import PrivateRoute from "./components/core/Auth/PrivateRoute.jsx";
 import Dashboard from "../src/pages/Dashboard.jsx";
 import MyProfile from "./components/core/Dashbord/MyProfile.jsx";
 import Error from "./pages/Error.jsx";
+import Settings from "./components/core/Dashbord/Settings/index.jsx";
 
 function App() {
   return (
@@ -79,6 +80,7 @@ function App() {
         >
 
         <Route path="dashboard/my-profile" element={<MyProfile />} />
+        <Route path="dashboard/Settings" element={<Settings />} />
 
         </Route>
 

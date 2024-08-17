@@ -1,10 +1,7 @@
-// // Import the required modules
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-// // Import the Controllers
-
-// Course Controllers Import
+// // Course Controllers Import
 const {
   createCourse,
   getAllCourses,
@@ -15,16 +12,16 @@ const {
   deleteCourse,
 } = require("../controllers/Course");
 
-// // Tags Controllers Import
+// // // Tags Controllers Import
 
-// // Categories Controllers Import
+// // // Categories Controllers Import
 const {
   showAllCategory,
   createCategory,
   categoryPageDetails,
 } = require("../controllers/Category");
 
-// // Sections Controllers Import
+ // Sections Controllers Import
 const {
   createSection,
   updateSection,
@@ -43,12 +40,12 @@ const {
   createRating,
   getAverageRating,
   getAllRatingAndReview,
-} = require("../controllers/RatingandReview");
+} = require("../controllers/RatingAndReview");
 
 const {
   updateCourseProgress,
   // getProgressPercentage,
-} = require("../controllers/courseProgress");
+} = require("../controllers/CourseProgress");
 // // Importing Middlewares
 const {
   auth,
@@ -59,10 +56,11 @@ const {
 
 // // ********************************************************************************************************
 // //                                      Course routes
-// // ********************************************************************************************************
+// // // ********************************************************************************************************
 
-// // Courses can Only be Created by Instructors
+// // // Courses can Only be Created by Instructors
 router.post("/createCourse", auth, isInstructor, createCourse);
+
 
 
 // // Edit Course routes
@@ -110,4 +108,9 @@ router.post("/createRating", auth, isStudent, createRating);
 router.get("/getAverageRating", getAverageRating);
 router.get("/getReviews", getAllRatingAndReview);
 
-module.exports = router;
+
+
+module.exports = router
+
+
+

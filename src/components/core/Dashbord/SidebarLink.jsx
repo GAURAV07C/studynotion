@@ -3,19 +3,16 @@ import { useDispatch } from "react-redux"
 import { NavLink, matchPath, useLocation } from "react-router-dom"
 
 const SidebarLink = ({ link, iconName }) => {
-    const Icon = Icons[iconName]
-    const location = useLocation()
-    const dispatch = useDispatch()
+  const Icon = Icons[iconName]
+  const location = useLocation()
+  const dispatch = useDispatch()
 
-    const matchRoute = (route) => {
-      console.log("jj",route)
-        return matchPath({ path: route }, location.pathname);
-      }
+  const matchRoute = (route) => {
+    return matchPath({ path: route }, location.pathname);
+  }
 
   return (
-
-    
-       <NavLink
+    <NavLink
       to={link.path}
       // onClick={() => dispatch(resetCourseState())}
       className={`relative px-8 py-2 text-sm font-medium ${

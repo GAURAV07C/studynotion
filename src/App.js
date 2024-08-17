@@ -18,8 +18,9 @@ import Error from "./pages/Error.jsx";
 
 function App() {
   return (
-    <div className="App w-screen min-h-screen bg-richblack-900 flex flex-col font-inter ">
+    <div className="App  w-screen min-h-screen bg-richblack-900 flex flex-col font-inter ">
       <NavBar />
+
       <Routes>
         <Route path="/" element={<Home />} />
 
@@ -76,13 +77,12 @@ function App() {
             </PrivateRoute>
           }
         >
-          <Route path="dashboard/my-profile" element={<MyProfile />} />
-          
 
+        <Route path="dashboard/my-profile" element={<MyProfile />} />
 
-
-        
         </Route>
+
+
 
         <Route path="*" element={<Error />} />
       </Routes>

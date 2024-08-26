@@ -15,6 +15,10 @@ exports.sendOTP = async (req, res) => {
   try {
     const { email } = req.body;
 
+    if(!email){
+      return res.status(400).json({ message: "Email is required" });
+    }
+
     const checkUserPresent = await User.findOne({ email });
 
     if (checkUserPresent) {

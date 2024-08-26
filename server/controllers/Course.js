@@ -5,10 +5,13 @@ const { uploadImageToCloudinary } = require("../utils/ImageUpload");
 
 exports.createCourse = async (req, res) => {
   try {
+    const userId = req.user.id;
+    console.log("id: ",userId);
+
     let { courseName,
        courseDescription,
        whatYouWillLearn,
-        price, 
+        price,
         tag: _tag,
         category,
         status,
@@ -16,13 +19,13 @@ exports.createCourse = async (req, res) => {
        } =
       req.body;
 
-    // const thumbnail = req.files.thumbnailImage;
+    const thumbnail = req.files.thumbnailImage;
 
      // Convert the tag and instructions from stringified Array to Array
-     
-    //  const tag = JSON.parse(_tag)
-    // const instructions = JSON.parse(_instructions)
- 
+
+     const tag = JSON.parse(_tag)
+    const instructions = JSON.parse(_instructions)
+
 
     if (
       !courseName ||
@@ -30,7 +33,7 @@ exports.createCourse = async (req, res) => {
       !whatYouWillLearn ||
       !price ||
       // !tag.length ||
-      // !thumbnail ||
+      !thumbnail ||
       !category 
       // !instructions.length
     ) {
@@ -44,8 +47,9 @@ exports.createCourse = async (req, res) => {
       status = "Draft"
     }
 
-    const userId = req.user.id;
-    const instructorDetails = await User.findById(userId);
+    const instructorDetails = await User.findById(userId , {
+      accountType: "Instructor",
+    });
     console.log("instructor", instructorDetails);
 
     if (!instructorDetails) {
@@ -64,10 +68,10 @@ exports.createCourse = async (req, res) => {
       });
     }
 
-    // const thumbnailImage = await uploadImageToCloudinary(
-    //   thumbnail,
-    //   process.env.FOLDER_NAME
-    // );
+    const thumbnailImage = await uploadImageToCloudinary(
+      thumbnail,
+      process.env.FOLDER_NAME
+    );
 
     const newCourse = await Course.create({
       courseName,
@@ -75,21 +79,20 @@ exports.createCourse = async (req, res) => {
       instructor: instructorDetails._id,
       whatYouWillLearn: whatYouWillLearn,
       price,
-      // tag,
+      tag,
       category: categoryDetails._id,
-      // thumbnail: thumbnailImage.secure_url,
+      thumbnail: thumbnailImage.secure_url,
       status: status,
-      // instructions,
-      // thumbnail: thumbnailImage.secure_url,
+      instructions,
     });
 
     await User.findByIdAndUpdate(
       { _id: instructorDetails._id },
       {
         $push: {
-          
+
             courses: newCourse._id,
-          
+
         },
       },
       { new: true }
